@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchCards, deleteCard, updateCard } from '../services/cardsService';
+import { fetchCards, deleteCard } from '../services/cardsService';
 
 function CardsList({ onEdit }) {
   const [cards, setCards] = useState([]);
@@ -21,13 +21,11 @@ function CardsList({ onEdit }) {
     if (!window.confirm('Are you sure you want to delete this card?')) return;
     try {
       await deleteCard(id);
-      // Удаляем карточку из списка
       setCards(prev => prev.filter(card => card.id !== id));
     } catch (err) {
       console.error('Error deleting:', err);
     }
   }
-
 
   return (
     <div>
@@ -41,7 +39,7 @@ function CardsList({ onEdit }) {
               <strong>{card.question}</strong> — {card.answer} ({card.category})
               {' '}
               <button onClick={() => handleDelete(card.id)}>Delete</button>
-              <button onClick={() => onEdit(card.id)}>Edit</button>
+              <button onClick={() => onEdit(card.id)}>Edit</button> {/* Кнопка редактирования */}
             </li>
           ))}
         </ul>
