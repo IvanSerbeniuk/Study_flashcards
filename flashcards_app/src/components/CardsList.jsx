@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { fetchCards, deleteCard } from '../services/cardsService';
+import { fetchCards, deleteCard, updateCard } from '../services/cardsService';
 
-function CardsList() {
+function CardsList({ onEdit }) {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -28,6 +28,7 @@ function CardsList() {
     }
   }
 
+
   return (
     <div>
       <h2>All Cards</h2>
@@ -40,6 +41,7 @@ function CardsList() {
               <strong>{card.question}</strong> — {card.answer} ({card.category})
               {' '}
               <button onClick={() => handleDelete(card.id)}>Delete</button>
+              <button onClick={() => onEdit(card.id)}>Edit</button>
             </li>
           ))}
         </ul>

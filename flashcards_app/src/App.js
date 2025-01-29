@@ -9,6 +9,7 @@ function App() {
   function handleNewCard() {
     setEditingCardId(null);
     setShowForm(true);
+    // стал у меня setShowForm = true а дальше куда это передается? почему появляется форма 2
   }
 
   function handleFormSuccess() {
@@ -18,11 +19,16 @@ function App() {
     window.location.reload(); // упрощенный вариант
   }
 
+  function handleEditCard(id) {
+    setEditingCardId(id);
+    setShowForm(true);
+  }
+
   return (
     <div>
       <h1>Flashcards (CRUD Example)</h1>
       <button onClick={handleNewCard}>Create New</button>
-      <CardsList />
+      <CardsList onEdit={handleEditCard} />
       {showForm && (
         <CardForm cardId={editingCardId} onSuccess={handleFormSuccess} />
       )}
